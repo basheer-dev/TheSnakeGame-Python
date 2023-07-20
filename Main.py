@@ -8,6 +8,7 @@ pygame.init()
 
 class Main():
 
+
     def __init__(self):
         self.run = True
         self.fps = 60
@@ -15,6 +16,7 @@ class Main():
         self.configureWindow()
         self.setSnakeVars()
         self.setFoodVars()
+
 
     def configureWindow(self):
         self.width, self.height = 500, 500
@@ -24,6 +26,7 @@ class Main():
 
         # Surfaces
         self.mainSurface = pygame.Surface(self.window.get_size(), pygame.SRCALPHA)
+
 
     def setSnakeVars(self):
         self.snakeVars = {
@@ -39,14 +42,16 @@ class Main():
             self.snakeVars['tails'].append(pygame.Rect(head.x - (head.w * i), head.y, head.w, head.h))
 
         '''
-            * The movementRateCounter variable defines how many frames has to pass before the snake moves on block.
+            * The movementRateCounter variable defines how many frames has to pass before the snake moves one block.
             * In this case the snake moves at the rate of one block each 10 frames.
         '''
+
 
     def setFoodVars(self):
         self.foodVars = {
             'rect': pygame.Rect(randrange(0, self.width - 10, 10), randrange(0, self.height - 10), 10, 10)
         }
+
 
     def main(self):
         self.showWindowGrid()
@@ -54,12 +59,14 @@ class Main():
         self.snake = Snake(main=self, surface=self.mainSurface)
         self.food = Food(main=self, surface=self.mainSurface, snakeHead=self.snake.head)
 
+
     def showWindowGrid(self):
         for i in range(0, self.width, 10):
             pygame.draw.line(self.window, (230, 230, 230), (i, 0), (i, self.height))
 
         for j in range(0, self.height, 10):
             pygame.draw.line(self.window, (230, 230, 230), (0, j), (self.width, j))
+
 
     def activate(self):
         clock = pygame.time.Clock()
