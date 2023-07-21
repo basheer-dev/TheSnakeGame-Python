@@ -8,7 +8,6 @@ pygame.init()
 
 class Main():
 
-
     def __init__(self):
         self.run = True
         self.fps = 60
@@ -38,6 +37,7 @@ class Main():
         }
 
         head = self.snakeVars['head']
+
         for i in range(1, 10):
             self.snakeVars['tails'].append(pygame.Rect(head.x - (head.w * i), head.y, head.w, head.h))
 

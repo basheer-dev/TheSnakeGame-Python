@@ -3,7 +3,6 @@ import pygame
 
 class Snake():
 
-
     def __init__(self, main, surface: pygame.Surface):
         self.mainClass = main
         self.surface = surface

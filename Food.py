@@ -4,7 +4,6 @@ from random import randrange
 
 class Food():
 
-
     def __init__(self, main, surface: pygame.Surface, snakeHead: pygame.Rect):
         self.mainClass = main
         self.surface = surface
