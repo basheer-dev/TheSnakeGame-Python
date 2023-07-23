@@ -1,4 +1,5 @@
 import pygame
+from Home import Home
 from random import randrange
 from Snake import Snake
 from Food import Food
@@ -12,6 +13,8 @@ class Main():
         self.run = True
         self.fps = 60
 
+        self.activateHome = True
+
         self.configureWindow()
         self.setSnakeVars()
         self.setFoodVars()
@@ -24,6 +27,7 @@ class Main():
         self.window = pygame.display.set_mode((self.width, self.height))
 
         # Surfaces
+        self.backgroundSurface = pygame.Surface(self.window.get_size(), pygame.SRCALPHA)
         self.mainSurface = pygame.Surface(self.window.get_size(), pygame.SRCALPHA)
 
 
@@ -62,10 +66,10 @@ class Main():
 
     def showWindowGrid(self):
         for i in range(0, self.width, 10):
-            pygame.draw.line(self.window, (230, 230, 230), (i, 0), (i, self.height))
+            pygame.draw.line(self.backgroundSurface, (230, 230, 230), (i, 0), (i, self.height))
 
         for j in range(0, self.height, 10):
-            pygame.draw.line(self.window, (230, 230, 230), (0, j), (self.width, j))
+            pygame.draw.line(self.backgroundSurface, (230, 230, 230), (0, j), (self.width, j))
 
 
     def activate(self):
@@ -78,16 +82,26 @@ class Main():
 
                 if event.type == pygame.QUIT:
                     self.run = False
+                    break
 
             self.window.fill((255, 255, 255))
 
-            self.window.blit(self.mainSurface, (0, 0))
-            self.mainSurface.fill((0, 0, 0, 0))
+            self.blitSurface(surface=self.backgroundSurface)
+            self.blitSurface(surface=self.mainSurface)
+
+            if self.activateHome:
+                self.home = Home(main=self)
 
             self.main()
             pygame.display.update()
 
         pygame.quit()
+
+
+    # MARK: - ACTIONS
+    def blitSurface(self, surface: pygame.Surface, position: tuple = (0, 0), color: tuple = (0, 0, 0, 0)):
+        self.window.blit(surface, position)
+        surface.fill(color)
 
 
 if __name__ == "__main__":
